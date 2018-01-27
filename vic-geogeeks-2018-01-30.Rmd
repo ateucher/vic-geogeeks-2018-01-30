@@ -5,6 +5,7 @@ author: "Andy Teucher"
 date: "2018/01/30"
 output:
   xaringan::moon_reader:
+    css: ["default", "css/my-theme.css"]
     chakra: libs/remark-latest.min.js
     lib_dir: libs
     nature:
@@ -46,6 +47,8 @@ leaflet() %>%
 ```
 
 ---
+background-image: url(img/vic-open-data.png)
+---
 
 ```{r warning=FALSE, message=FALSE}
 library(sf)
@@ -63,8 +66,7 @@ library(ggplot2)
 
 ggplot() + 
   geom_sf(data = dogs, aes(fill = DogLicence)) + 
-  scale_fill_viridis_c() +
-  theme_minimal()
+  scale_fill_viridis_c() + theme_minimal()
 ```
 
 ---
@@ -107,9 +109,7 @@ ggplot() +
   scale_fill_viridis_c() + theme_minimal()
 ```
 
-
 ---
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
 
 ???
 
