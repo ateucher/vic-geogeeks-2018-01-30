@@ -1,6 +1,6 @@
 ---
 title: "R for Geospatial Data Science"
-subtitle: ""
+subtitle: "Victoria GeoGeeks Meetup"
 author: "Andy Teucher"
 date: "2018/01/30"
 output:
@@ -16,11 +16,22 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      cache = TRUE)
 ```
 
-class: middle, center
-#### Geographic Information Systems (GIS) vs Geographic Data Science (GDS)<sup>1</sup>
 
+# Data Science
+.center[![](img/data-science-cycle.png)]
+
+.footnote[Wickham and Grolemund: [R for Data Science](http://r4ds.had.co.nz/)]
+
+---
+
+### .center[Geographic Information Systems (GIS)</br>vs</br>Geographic Data Science (GDS)<sup>1</sup>]
+
+.middle[
 ```{r echo=FALSE}
 library(readr)
 tbl_11.1 <- read_csv('Attribute,GIS,GDS
@@ -30,6 +41,7 @@ Reproduciblility,Minimal,Maximal')
 
 knitr::kable(tbl_11.1, format = "html")
 ```
+]
 
 .footnote[
 [1] Geocomputation with R, [Table 1.1](https://geocompr.robinlovelace.net/intro.html#tab:gdsl)
@@ -37,7 +49,7 @@ knitr::kable(tbl_11.1, format = "html")
 
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(leaflet)
 leaflet() %>%
   addProviderTiles("Stamen.TonerLite") %>% 
@@ -50,7 +62,7 @@ leaflet() %>%
 background-image: url(img/vic-open-data.png)
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(sf)
 library(mapview)
 
@@ -61,7 +73,7 @@ mapview(dogs)
 
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(ggplot2)
 
 ggplot() + 
@@ -71,7 +83,7 @@ ggplot() +
 
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 hydrants <- read_sf("data/hydrants/Hydrants.shp")
 
 ggplot() + 
@@ -81,7 +93,7 @@ ggplot() +
 
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 hydrants <- st_intersection(hydrants, st_geometry(dogs))
 
 ggplot() + 
@@ -92,7 +104,7 @@ ggplot() +
 
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 library(dplyr)
 dogs_and_hydrants <- st_join(dogs, hydrants) %>% 
   group_by(Neighbourh) %>% 
@@ -103,7 +115,7 @@ dogs_and_hydrants <- st_join(dogs, hydrants) %>%
 
 ---
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 ggplot() + 
   geom_sf(data = dogs_and_hydrants, aes(fill = hydrants_per_dog)) + 
   scale_fill_viridis_c() + theme_minimal()
