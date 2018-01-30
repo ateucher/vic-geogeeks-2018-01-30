@@ -27,6 +27,8 @@ background-image: url(img/spreadsheet.png)
 
 ???
 
+When Paul invited me I asked him how many people would be R users... and he said maybe none, possibly as many as three. So instead of spending a lot of time convincing you of R's spatial powers (which are many), I'm going to try to convince why using a tool like R is a good idea for any sort of analytical work, including spatial, which by the way R is REALLY good for.
+
 I'm going to start off by describing a pretty common scenario, and then talk about how using **R** can help:
 
 - You're doing a big project for a client. You have a four or five spatial files and a few csvs or Excel sheets containing more data related to the spatial layers. 
@@ -59,7 +61,7 @@ background-image: url(img/graph.png)
 
 ---
 
-background-image: url(img/cycle.png)
+background-image: url(img/full-cycle.png)
 
 ???
 
@@ -101,15 +103,19 @@ background-image: url(img/Rlogo.png)
 
 ---
 
-background-image: url(img/Rlogo.png)
+background-image: url(img/efficiency-car.jpg)
 
-## Efficiency (Honda civic)
+# Efficiency
 
 ???
 
 So, what can **R** give you?
 
-Efficiency:
+---
+
+background-image: url(img/full-cycle.png)
+
+???
 
 The entire workflow can be done efficiently in **R**, including:
 
@@ -121,9 +127,23 @@ The entire workflow can be done efficiently in **R**, including:
 
 ---
 
-background-image: url(img/Rlogo.png)
+background-image: url(img/R-flow.png)
 
-## Reproducibility (photocopier)
+???
+
+The entire workflow can be done efficiently in **R**, including:
+
+- reading in raw data from many different sources - spatial and non-spatial, 
+- preparing the data for analysis, including easily integrating tabular and spatial data,
+- performing spatial data manipulation and analysis,
+- performing statistical analysis
+- creating publication-quality graphs and figures.
+
+---
+
+background-image: url(img/photocopier.jpg)
+
+# Reproducibility
 
 ???
 
@@ -135,9 +155,9 @@ Reproducibilty means:
 
 ---
 
-background-image: url(img/Rlogo.png)
+background-image: url(img/k-car.jpg)
 
-## Reliability (k-car)
+# Reliability
 
 ???
 
@@ -148,9 +168,9 @@ Using **R** can help you:
 
 ---
 
-background-image: url(img/Rlogo.png)
+background-image: url(img/swiss-army.jpg)
 
-## Versatility (pliers)
+# Versatility
 
 ???
 
@@ -164,9 +184,11 @@ R has a huge array of add-on packages that extend the capabilities of R for perf
 
 ---
 
-background-image: url(img/Rlogo.png)
+# Community
 
-## Community
+.img-right[![](img/R-community.jpg)]
+
+.footnote[['Faces of R' by Maelle Salmon](http://www.masalmon.eu/2017/03/19/facesofr/)]
 
 ???
 
@@ -188,7 +210,7 @@ library(readr)
 tbl_11.1 <- read_csv('Attribute,GIS,GDS
 Home disciplines,Geography,"Geography, Computing, Statistics"
 Software focus,Graphical User Interface,Code
-Reproduciblility,Minimal,Maximal')
+Reproducibility,Minimal,Maximal')
 
 knitr::kable(tbl_11.1, format = "html")
 ```
@@ -272,6 +294,10 @@ dogs_and_hydrants <- st_join(dogs, hydrants) %>%
             hydrants_per_dog = n_hydrants / licences)
 ```
 
+```{r echo=FALSE}
+knitr::kable(st_set_geometry(dogs_and_hydrants, NULL), format = "html")
+```
+
 ---
 
 ```{r}
@@ -282,7 +308,7 @@ ggplot() +
 
 ---
 
-```{r}
+```{r fig.width=8}
 ggplot(dogs_and_hydrants, aes(x = Neighbourh, y = hydrants_per_dog)) + 
   geom_col(aes(fill = licences)) + scale_fill_viridis_c() + 
   coord_flip() + theme_minimal()

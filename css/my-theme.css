@@ -15,3 +15,10 @@
 .leaflet {
   margin: auto !important;
 }
+
+.img-right {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 550px;
+}
