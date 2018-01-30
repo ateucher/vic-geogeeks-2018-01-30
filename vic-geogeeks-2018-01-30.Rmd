@@ -31,7 +31,7 @@ When Paul invited me I asked him how many people would be R users... and he said
 
 I'm going to start off by describing a pretty common scenario, and then talk about how using **R** can help:
 
-- You're doing a big project for a client. You have a four or five spatial files and a few csvs or Excel sheets containing more data related to the spatial layers. 
+- You're doing a big project for a client. You have a four or five spatial files and a few csvs or Excel sheets containing data related to the spatial layers. 
 - First you do a bunch of data cleaning in the spreadsheets - fixing date formats, unit conversions, transformations, unify inconsistent variable names, etc.
 
 ---
@@ -61,15 +61,29 @@ background-image: url(img/graph.png)
 
 ---
 
-background-image: url(img/full-cycle.png)
+class: middle, center
+
+.pull-left[![](img/report.jpg)]
+--
+
+# "Thank you for you hard work, this is exactly what we were looking for!"
 
 ???
 
 - Combine the results in a word document, convert it to a pdf and give to your client. They thank you for your great work, but say 'Oh, I think I gave you the wrong version of one of the spatial files, and that Excel spreadsheet has been updated.'
 
 ---
+class: inverse
 
-background-image: url(img/leia-what.gif)
+## "But, I think I gave you the wrong version of shapefile #2. Oh, and that Excel spreadsheet has been updated."
+
+--
+
+.center[![](img/leia-what.gif)]
+
+---
+
+background-image: url(img/full-cycle.png)
 
 ???
 
@@ -226,7 +240,7 @@ Why R for spatial?
 
 - Generally the same arguments as I made above for general data analysis.
 
-- reading, writing and manipulating spatial data; making static and interactive maps; applying geocomputation to solve real-world problems; and spatial statistics and modelling
+- reading, writing and manipulating spatial data; making static and interactive maps; and spatial statistics and modelling
 
 - Ability to seamlessly switch between spatial and non-spatial data processing, modeling and visualization tasks
 
@@ -244,11 +258,16 @@ leaflet() %>%
 ---
 background-image: url(img/vic-open-data.png)
 ---
+```{r}
+
+```
 
 ```{r}
 library(sf)
 library(mapview)
-
+temp <- tempfile()
+download.file("http://vicmap.victoria.ca/_GISData/DogsByNeighbourhoodSHP.zip", destfile = temp)
+unzip(temp, exdir = "data/dogs")
 dogs <- read_sf("data/dogs/DogsByNeighbourhood.shp")
 
 mapview(dogs)
@@ -267,6 +286,10 @@ ggplot() +
 ---
 
 ```{r}
+temp <- tempfile()
+download.file("http://vicmap.victoria.ca/_GISData/HydrantsSHP.zip", destfile = temp)
+unzip(temp, exdir = "data/hydrants")
+
 hydrants <- read_sf("data/hydrants/Hydrants.shp")
 
 ggplot() + 
