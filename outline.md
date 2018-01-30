@@ -3,8 +3,8 @@
 Field Guide to R Ecosystem:
   - R is an open-source programming language for data analysis and visualization.
   - In many ways it is similar to other general purpose interpreted languages like Python, but unlike Python, R was originally created as a statistical programming language and so it is designed from the ground up around the manipulation, analysis, and visualization of data - it is now often considered the 'lingua franca' of data.
-  - It also relatively easy to make publication-quality graphics.
-  - R is available pre-compiled for Windows, MacOS and some Linux distributions.
+  - It also easy to make publication-quality graphics.
+  - R is available for Windows, MacOS and most popular Linux distributions.
   - You can run it interactively by typing directly into the console, or from a sequence of commands written in text files, or "scripts". Scripts can be run against a dataset to produce a defined output, such as a chart or another dataset which contains the results of the analysis.
 
 ## Why R?
@@ -17,7 +17,9 @@ I'm going to start off by describing a pretty common scenario, and then talk abo
 - You import the tabular data and join it to the appropriate layers, and do more work.
 - Export the tabular data out so you can make some nice graphs in Exel, and make a few pretty maps in the GIS for presentation.
 - Combine the results in a word document, convert it to a pdf and give to your client. They thank you for your great work, but say 'Oh, I think I gave you the wrong version of one of the spatial files, and that Excel spreadsheet has been updated.'
-- Can you redo the analysis exactly the same way in each of the different programs? How long will it take you?
+- Can you redo the analysis exactly the same way? How long will it take you?
+
+## Data Science Cycle
  
 ## So, what can **R** give you?
 
