@@ -66,7 +66,7 @@ class: middle, center
 .pull-left[![](img/report.jpg)]
 --
 
-# "Thank you for you hard work, this is exactly what we were looking for!"
+# "Thank you for your hard work, this is exactly what we were looking for!"
 
 ???
 
@@ -88,13 +88,6 @@ background-image: url(img/full-cycle.png)
 ???
 
 - Can you redo the analysis exactly the same way? How long will it take you?
-
----
-
-# Data Science
-.center[![](img/data-science-cycle.png)]
-
-.footnote[Wickham and Grolemund: [R for Data Science](http://r4ds.had.co.nz/)]
 
 ---
 
@@ -152,6 +145,7 @@ The entire workflow can be done efficiently in **R**, including:
 - performing spatial data manipulation and analysis,
 - performing statistical analysis
 - creating publication-quality graphs and figures.
+- All your iteration happens in one place, and is recorded in scripts
 
 ---
 
@@ -216,6 +210,31 @@ Fantastic online **R** Community
 
 ---
 
+# Data Science
+.center[![](img/data-science-cycle.png)]
+
+.footnote[Wickham and Grolemund: [R for Data Science](http://r4ds.had.co.nz/)]
+
+???
+
+- hyped word, lots of definities out there
+- To me - it's data analysis but inclusive of all steps of the data cycle, with a greater emphasis on programming.
+- Spatial analysis can easily be fit into this framework, another side of the same coin.
+
+---
+
+# Geographical Data Science
+.center[![](img/data-science-cycle.png)]
+
+.footnote[Wickham and Grolemund: [R for Data Science](http://r4ds.had.co.nz/)]
+
+???
+
+- movement labelled Geographical Data Science (GDS). This recent concept essentially combines ‘data science’ with GIS.
+- focus on reproducibility and a command-line interface
+
+---
+
 ### .center[Geographic Information Systems (GIS)</br>vs</br>Geographic Data Science (GDS)<sup>1</sup>]
 
 .middle[
@@ -245,7 +264,7 @@ Why R for spatial?
 - Ability to seamlessly switch between spatial and non-spatial data processing, modeling and visualization tasks
 
 ---
-
+exclude: true
 
 ```{r eval=require(leaflet)}
 leaflet() %>%
@@ -258,20 +277,25 @@ leaflet() %>%
 ---
 background-image: url(img/vic-open-data.png)
 ---
-```{r}
-
+```{r include=FALSE, eval=FALSE}
+temp <- tempfile()
+download.file("http://vicmap.victoria.ca/_GISData/DogsByNeighbourhoodSHP.zip", destfile = temp)
+unzip(temp, exdir = "data/dogs")
 ```
 
 ```{r}
 library(sf)
 library(mapview)
-temp <- tempfile()
-download.file("http://vicmap.victoria.ca/_GISData/DogsByNeighbourhoodSHP.zip", destfile = temp)
-unzip(temp, exdir = "data/dogs")
 dogs <- read_sf("data/dogs/DogsByNeighbourhood.shp")
 
 mapview(dogs)
 ```
+
+???
+
+sf - new package that implements the simple features spec in R for representing spatial data
+ - Binds to GDAL for reading and writing data, to GEOS for geometrical operations, and to Proj.4 for projection conversions and datum transformations
+ - can read and write almost any format
 
 ---
 
@@ -283,13 +307,20 @@ ggplot() +
   scale_fill_viridis_c() + theme_minimal()
 ```
 
+???
+
+Plotting - built in in sf, even better in ggplot2
+
 ---
 
-```{r}
+```{r include=FALSE, eval=FALSE}
 temp <- tempfile()
 download.file("http://vicmap.victoria.ca/_GISData/HydrantsSHP.zip", destfile = temp)
 unzip(temp, exdir = "data/hydrants")
+```
 
+
+```{r}
 hydrants <- read_sf("data/hydrants/Hydrants.shp")
 
 ggplot() + 
@@ -307,6 +338,15 @@ ggplot() +
   scale_fill_viridis_c() + theme_minimal()
 ```
 
+???
+
+### geometry generating logical operators
+
+* `st_union`: union of several geometries
+* `st_intersection`: intersection of pairs of geometries
+* `st_difference`: difference between pairs of geometries
+* `st_sym_difference`: symmetric difference (`xor`)
+
 ---
 
 ```{r eval=require(dplyr)}
@@ -320,6 +360,50 @@ dogs_and_hydrants <- st_join(dogs, hydrants) %>%
 ```{r echo=FALSE}
 knitr::kable(st_set_geometry(dogs_and_hydrants, NULL), format = "html")
 ```
+
+???
+
+### logical binary geometry predicates
+
+* `st_intersects`: touch or overlap
+* `st_disjoint`: !intersects
+* `st_touches`: touch
+* `st_crosses`: cross (don't touch)
+* `st_within`: within
+* `st_contains`: contains
+* `st_overlaps`: overlaps
+* `st_covers`: cover
+* `st_covered_by`: covered by
+* `st_equals`: equals
+* `st_equals_exact`: equals, with some fuzz
+
+### higher-level operations: summarise, interpolate, aggregate, st_join
+
+* `aggregate` and `summarise` use `st_union` (by default) to group feature geometries
+* `st_interpolate_aw`: area-weighted interpolation, uses `st_intersection` to interpolate or redistribute attribute values, based on area of overlap:
+* `st_join` uses one of the logical binary geometry predicates (default: `st_intersects`) to join records in table pairs
+
+### manipulating geometries
+
+* `st_line_merge`: merges lines
+* `st_segmentize`: adds points to straight lines
+* `st_voronoi`: creates voronoi tesselation
+* `st_centroid`: gives centroid of geometry
+* `st_convex_hull`: creates convex hull of set of points
+* `st_triangulate`: triangulates set of points (not constrained)
+* `st_polygonize`: creates polygon from lines that form a closed ring
+* `st_simplify`: simplifies lines by removing vertices
+* `st_split`: split a polygon given line geometry
+* `st_buffer`: compute a buffer around this geometry/each geometry
+* `st_make_valid`: tries to make an invalid geometry valid (requires lwgeom)
+* `st_boundary`: return the boundary of a geometry
+
+### convenience functions
+
+* `st_zm`: sets or removes z and/or m geometry
+* `st_coordinates`: retrieve coordinates in a matrix or data.frame
+* `st_geometry`: set, or retrieve `sfc` from an `sf` object
+* `st_is`: check whether geometry is of a particular type
 
 ---
 

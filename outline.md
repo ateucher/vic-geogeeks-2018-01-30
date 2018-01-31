@@ -90,3 +90,7 @@ https://geocompr.robinlovelace.net/
 http://r-spatial.org/
 
 #rstats, community.rstudio.com, mailing lists, StackOverflow, RWeekly
+
+
+download.file or read.csv
+Add SAS/SPSS to cycle
