@@ -264,17 +264,6 @@ Why R for spatial?
 - Ability to seamlessly switch between spatial and non-spatial data processing, modeling and visualization tasks
 
 ---
-exclude: true
-
-```{r eval=require(leaflet)}
-leaflet() %>%
-  addProviderTiles("Stamen.TonerLite") %>% 
-  addAwesomeMarkers(lng = -123.369407, lat = 48.428881, 
-                    label = paste0("<h3>", emo::ji("beer"), "</h3>"), 
-                    labelOptions = labelOptions(noHide = TRUE))
-```
-
----
 background-image: url(img/vic-open-data.png)
 ---
 ```{r include=FALSE, eval=FALSE}
@@ -423,7 +412,15 @@ ggplot(dogs_and_hydrants, aes(x = Neighbourh, y = hydrants_per_dog)) +
 
 
 ---
+.pull-left[
+## Me:
 
+Twitter: @andyteucher
+
+GitHub: @ateucher
+]
+
+.pull-right[
 ## Resources:
 
 http://fg2re.sellorm.com/
@@ -433,3 +430,14 @@ http://r4ds.had.co.nz/
 https://geocompr.robinlovelace.net/
 
 http://r-spatial.org/
+]
+
+---
+
+```{r eval=require(leaflet)}
+leaflet() %>%
+  addProviderTiles("Stamen.TonerLite") %>% 
+  addAwesomeMarkers(lng = -123.369407, lat = 48.428881, 
+                    label = paste0("<h3>", emo::ji("beer"), "</h3>"), 
+                    labelOptions = labelOptions(noHide = TRUE))
+```
