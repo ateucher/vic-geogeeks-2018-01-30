@@ -432,6 +432,10 @@ https://geocompr.robinlovelace.net/
 http://r-spatial.org/
 ]
 
+.footnote[Source code for this presentation available [here](https://github.com/ateucher/vic-geogeeks-2018-01-30)
+
+Made with [xaringan](https://slides.yihui.name/xaringan/)
+]
 ---
 
 ```{r eval=require(leaflet)}
