@@ -230,8 +230,8 @@ Fantastic online **R** Community
 
 ???
 
-- movement labelled Geographical Data Science (GDS). This recent concept essentially combines ‘data science’ with GIS.
-- focus on reproducibility and a command-line interface
+- movement labelled Geographical Data Science (GDS). Combines ‘data science’ with GIS.
+- focus on reproducibility and programming interface
 
 ---
 
@@ -250,7 +250,7 @@ knitr::kable(tbl_11.1, format = "html")
 ]
 
 .footnote[
-[1] Geocomputation with R, [Table 1.1](https://geocompr.robinlovelace.net/intro.html#tab:gdsl)
+[1] Lovelace, Nowosad, and Muenchow: Geocomputation with R ([Table 1.1](https://geocompr.robinlovelace.net/intro.html#tab:gdsl))
 ]
 
 ???
@@ -265,6 +265,8 @@ Why R for spatial?
 
 ---
 background-image: url(img/vic-open-data.png)
+---
+background-image: url(img/dog.png)
 ---
 ```{r include=FALSE, eval=FALSE}
 temp <- tempfile()
@@ -298,7 +300,11 @@ ggplot() +
 
 ???
 
-Plotting - built in in sf, even better in ggplot2
+Plotting - built-in in sf, even better in ggplot2
+
+---
+
+background-image: url(img/hydrant.png)
 
 ---
 
@@ -386,13 +392,6 @@ knitr::kable(st_set_geometry(dogs_and_hydrants, NULL), format = "html")
 * `st_buffer`: compute a buffer around this geometry/each geometry
 * `st_make_valid`: tries to make an invalid geometry valid (requires lwgeom)
 * `st_boundary`: return the boundary of a geometry
-
-### convenience functions
-
-* `st_zm`: sets or removes z and/or m geometry
-* `st_coordinates`: retrieve coordinates in a matrix or data.frame
-* `st_geometry`: set, or retrieve `sfc` from an `sf` object
-* `st_is`: check whether geometry is of a particular type
 
 ---
 
